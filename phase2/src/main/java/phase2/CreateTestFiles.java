@@ -29,7 +29,6 @@ public class CreateTestFiles {
             createFile(emptyFilePath, "");
             // Invalid file path, no need to create
             createFile(oneRowFiveColumns, "1 2 3 4 5");
-            createFile(multipleRowsFilePath, "1 2 3\n4 5 6\n7 8 9\n10 11 12\n13 14 15");
             createFile(oneColumnSevenRows, "1\n2\n3\n4\n5\n6\n7");
             
            
