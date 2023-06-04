@@ -7,7 +7,7 @@ public class tryParser {
 
 	    public static void main(String[] args) {
 	        // Test file path
-	        String filePath =  "C:\\Users\\rasha\\Desktop\\sudoku.txt";
+	        String filePath =  "C:\\Users\\rasha\\Desktop\\valid_file.txt";
 
 	        try {
 	            // Parse the puzzle data

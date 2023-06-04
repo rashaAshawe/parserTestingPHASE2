@@ -6,22 +6,43 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 
 public class PuzzleParserTest {
-
+	
+	
+	String oneRowFiveColumns = "C:\\Users\\rasha\\Desktop\\oneRowFiveColumns.txt";
+	String validFilePath =  "C:\\Users\\rasha\\Desktop\\valid_file.txt";
+    String emptyFilePath = "C:\\Users\\rasha\\Desktop\\empty_file.txt";
+    String invalidFilePath = "C:\\Users\\rasha\\Desktop\\invalid_fiile.txt";
+    String oneColumnSevenRows = "C:\\Users\\rasha\\Desktop\\oneColumnSevenRows.txt";
     @Test
     void testParsePuzzleData() throws IOException {
-        // Partition: filePath
-        // Subdomain: Parsing puzzle data from a file
-        // Test Cases:
-        // 1. Valid file path with correct puzzle data
+        // Partition: Parsing puzzle data from a file
+    	
+        // Subdomain: 
+    	// 1. Valid file path with correct puzzle data
         // 2. Valid file path with empty puzzle data
         // 3. Invalid file path
-        String[][] expectedPuzzle = {{"1", "2", "3"}, {"4", "5", "6"}, {"7", "8", "9"}};
-        String validFilePath =  "C:\\Users\\rasha\\Desktop\\valid_file.txt";
-        String emptyFilePath = "C:\\Users\\rasha\\Desktop\\empty_file.txt";
-        String invalidFilePath = "C:\\Users\\rasha\\Desktop\\invalid_file.txt";
+    	
+        // Test Cases:
+        // 1. Valid file path with 9rows and 9 columns puzzle data-->return expected puzzle
+        // 2. Valid empty file path with 0 rows and 0 columns-->return 0
+        // 3. Invalid file path with a spelling mistake--> IOException
+    	
+    	String[][] expectedPuzzle = {
+    		    {"5", "3", ".", ".", "7", ".", ".", ".", "."},
+    		    {"6", ".", ".", "1", "9", "5", ".", ".", "."},
+    		    {".", "9", "8", ".", ".", ".", ".", "6", "."},
+    		    {"8", ".", ".", ".", "6", ".", ".", ".", "3"},
+    		    {"4", ".", ".", "8", ".", "3", ".", ".", "1"},
+    		    {"7", ".", ".", ".", "2", ".", ".", ".", "6"},
+    		    {".", "6", ".", ".", ".", ".", "2", "8", "."},
+    		    {".", ".", ".", "4", "1", "9", ".", ".", "5"},
+    		    {".", ".", ".", ".", "8", ".", ".", "7", "9"}
+    		};
+       
 
         String[][] parsedPuzzle = PuzzleParser.parsePuzzleData(validFilePath);
         Assertions.assertArrayEquals(expectedPuzzle, parsedPuzzle);
+        
 
         parsedPuzzle = PuzzleParser.parsePuzzleData(emptyFilePath);
         Assertions.assertEquals(0, parsedPuzzle.length);
@@ -31,55 +52,53 @@ public class PuzzleParserTest {
 
     @Test
     void testCountRows() throws IOException {
-        // Partition: filePath
-        // Subdomain: Counting the number of rows in a file
-        // Test Cases:
-        // 1. Empty file (0 rows)
+        // Partition: Counting the number of rows in a file
+    	
+        // Subdomain: 
+    	// 1. Empty file 
         // 2. File with a single row
         // 3. File with multiple rows
-        String emptyFilePath = "C:\\Users\\rasha\\Desktop\\empty_file.txt";
-        String singleRowFilePath = "C:\\Users\\rasha\\Desktop\\single_row_file.txt";
-        String multipleRowsFilePath = "C:\\Users\\rasha\\Desktop\\multiple_rows_file.txt";
-
+    	
+        // Test Cases:
+       
+    	// 1. Empty file (0 rows)-->return 0
+        // 2. File with a single row and Five columns-->return 1
+        // 3. File with Seven rows and one columns-->return 7
+        
         int numRows = PuzzleParser.countRows(emptyFilePath);
         Assertions.assertEquals(0, numRows);
 
-        numRows = PuzzleParser.countRows(singleRowFilePath);
+        numRows = PuzzleParser.countRows(oneRowFiveColumns);
         Assertions.assertEquals(1, numRows);
 
-        numRows = PuzzleParser.countRows(multipleRowsFilePath);
-        Assertions.assertEquals(5, numRows);
+        numRows = PuzzleParser.countRows(oneColumnSevenRows);
+        Assertions.assertEquals(7, numRows);
     }
 
     @Test
     void testCountCols() throws IOException {
-        // Partition: filePath
-        // Subdomain: Counting the number of columns in a file
+        // Partition: Counting the number of columns in a file
+    	
+        // Subdomain: 
+    	// 1. Empty file 
+        // 2. File with a single row and multiple columns
+        // 3. File with multiple rows and one columns
+    	
         // Test Cases:
-        // 1. Empty file (0 columns)
-        // 2. File with a single row and one column
-        // 3. File with a single row and multiple columns
-        // 4. File with multiple rows with the same number of columns
-        // 5. File with multiple rows with different numbers of columns
-        String emptyFilePath = "C:\\Users\\rasha\\Desktop\\empty_file.txt";
-        String singleColumnFilePath = "C:\\Users\\rasha\\Desktop\\single_column_file.txt";
-        String multipleColumnsFilePath = "C:\\Users\\rasha\\Desktop\\multiple_columns_file.txt";
-        String sameColumnsFilePath = "C:\\Users\\rasha\\Desktop\\same_columns_file.txt";
-        String differentColumnsFilePath = "C:\\Users\\rasha\\Desktop\\different_columns_file.txt";
+        // 1. Empty file (0 columns)-->return 0
+        // 2. File with a single row and Five columns-->return 5
+        // 3. File with Seven rows and one columns-->return 1
+        
 
         int numCols = PuzzleParser.countCols(emptyFilePath);
         Assertions.assertEquals(0, numCols);
 
-        numCols = PuzzleParser.countCols(singleColumnFilePath);
+        numCols = PuzzleParser.countCols(oneColumnSevenRows);
         Assertions.assertEquals(1, numCols);
 
-        numCols = PuzzleParser.countCols(multipleColumnsFilePath);
-        Assertions.assertEquals(7, numCols);
-
-        numCols = PuzzleParser.countCols(sameColumnsFilePath);
+        numCols = PuzzleParser.countCols(oneRowFiveColumns);
         Assertions.assertEquals(5, numCols);
 
-        numCols = PuzzleParser.countCols(differentColumnsFilePath);
-        Assertions.assertEquals(6, numCols);
+        
     }
 }
